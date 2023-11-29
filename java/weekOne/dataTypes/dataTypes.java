@@ -1,4 +1,4 @@
-public class DataTypes {
+public class dataTypes {
     public static void main(String[] args) {
         int integer = 10;
         System.out.println("Integer: " + integer);
