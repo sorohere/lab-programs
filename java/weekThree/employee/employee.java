@@ -27,15 +27,13 @@ public class Employee {
     }
 
     public static void main(String[] args) {
-        Employee s1 = new Employee("1MS22CS119", "Software Developer", 200000);
-        Employee s2 = new Employee("1MS22CS112", "Data Analyst", 120560);
-        Employee s3 = new Employee("1MS22CS124", "Software Tester", 90422);
-        Employee s4 = new Employee("1MS22CS126", "Financial Advisory", 180000);
+        Employee s1 = new Employee("1MS22CS126", "MLE", 200000);
+        Employee s2 = new Employee("1MS22CS119", "SDE", 100000);
+        Employee s3 = new Employee("1MS22CS096", "ML", 150000);
 
         s1.display();
         s2.display();
         s3.display();
-        s4.display();
 
         Employee.displayTotalEmployees();
         Employee.displayTotalSalaryExpenses();
