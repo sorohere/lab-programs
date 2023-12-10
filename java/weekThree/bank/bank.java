@@ -20,7 +20,7 @@ class bank {
 
     void withdraw(double amount) {
         if(balance < amount) {
-            System.out.println("error 404 : Amount under-flow.");
+            System.out.println("error 404 : Balance under-flow.");
         }
         else if(balance >= amount) {
             balance -= amount;
@@ -30,7 +30,12 @@ class bank {
 
     void deposit(double amount) {
         balance += amount;
-        System.out.println("Credited of amount $" + amount + " from Account no. : "+accountNumber);
+        System.out.println("Credited of amount $" + amount + " in Account no. : "+accountNumber);
+    }
+
+    void bankDisplay() {
+        System.out.println("\nTotal accounts : " + totalAccounts);
+        System.out.println("Total balance of all accounts : " + totalBalance);
     }
 
     public static void main(String args[]) {
@@ -52,5 +57,7 @@ class bank {
         s2.withdraw(40);
         s2.withdraw(100);
         s2.deposit(50);
+
+        s1.bankDisplay();
     }
 }
