@@ -56,14 +56,27 @@ int main() {
     printf("Enter the element to search: ");
     scanf("%d", &key);
 
-    int iterResult = binarySearchIterative(arr, 0, size - 1, key);
-    if (iterResult != -1) printf("Element %d found at index (iterative): %d\n", key, iterResult);
-    else printf("Element %d not found (iterative)\n", key);
-    
+    int searchMethod;
+    printf("Choose search method:\n");
+    printf("1. Iterative\n");
+    printf("2. Recursive\n");
+    printf("Enter your choice (1 or 2): ");
+    scanf("%d", &searchMethod);
 
-    int recurResult = binarySearchRecursive(arr, 0, size - 1, key);
-    if (recurResult != -1) printf("Element %d found at index (recursive): %d\n", key, recurResult);
-    else printf("Element %d not found (recursive)\n", key);
+    switch (searchMethod) {
+        case 1:
+            int iterResult = binarySearchIterative(arr, 0, size - 1, key);
+            if (iterResult != -1) printf("Element %d found at index (iterative): %d\n", key, iterResult);
+            else printf("Element %d not found (iterative)\n", key);
+            break;
+        case 2:
+            int recurResult = binarySearchRecursive(arr, 0, size - 1, key);
+            if (recurResult != -1) printf("Element %d found at index (recursive): %d\n", key, recurResult);
+            else printf("Element %d not found (recursive)\n", key);
+            break;
+        default:
+            printf("Invalid choice\n");
+    }
     
     return 0;
 }
