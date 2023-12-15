@@ -92,5 +92,6 @@ public class Stack {
             int check = scanner.nextInt();
             if (check == 1) break;
         }
+        scanner.close();
     }
 }

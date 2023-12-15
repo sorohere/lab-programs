@@ -1,5 +1,3 @@
-import java.util.*;
-
 class methodOverloading {
     void add(int a, int b) {
         System.out.println("ans : " + a+b);
