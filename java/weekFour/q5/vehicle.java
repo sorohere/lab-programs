@@ -1,5 +1,3 @@
-import java.util.*;;
-
 public class vehicle {
     public void starting() {
         System.out.println("Vehicle is starting.");
