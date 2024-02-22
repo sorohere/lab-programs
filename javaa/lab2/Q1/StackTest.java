@@ -17,9 +17,6 @@ class FixedStack implements StackOp {
     public void push(int item) {
         if (tos == stk.length - 1) {
             System.out.println("Stack Overflows");
-            int[] t = new int[stk.length * 2];
-            System.arraycopy(stk, 0, t, 0, stk.length);
-            stk = t;
         }
         stk[++tos] = item;
     }
