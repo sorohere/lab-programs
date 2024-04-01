@@ -3,15 +3,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ReverseNumberApplet extends Applet implements ActionListener, KeyListener {
-    TextField textField;
-    Label label;
+    TextField tf;
+    Label lb;
 
     public void init() {
-        label = new Label("Type a number and press 'J' to see its reverse:");
-        textField = new TextField(10);
+        lb = new Label("Type a number and press 'J' to see its reverse:");
+        
+        tf = new TextField(10);
         textField.addKeyListener(this);
-        add(label);
-        add(textField);
+        
+        add(lb);
+        add(tf);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -28,7 +30,7 @@ public class ReverseNumberApplet extends Applet implements ActionListener, KeyLi
 
     public void keyReleased(KeyEvent e) {
         if (e.getKeyChar() == 'J') {
-            String numberStr = textField.getText();
+            String numberStr = tf.getText();
             try {
                 int number = Integer.parseInt(numberStr);
                 int reversedNumber = reverseNumber(number);
