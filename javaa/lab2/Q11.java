@@ -10,7 +10,7 @@ public class ReverseNumberApplet extends Applet implements ActionListener, KeyLi
         lb = new Label("Type a number and press 'J' to see its reverse:");
         
         tf = new TextField(10);
-        textField.addKeyListener(this);
+        tf.addKeyListener(this);
         
         add(lb);
         add(tf);
