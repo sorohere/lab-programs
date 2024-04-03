@@ -1,6 +1,24 @@
 #include <stdio.h>
 #include <string.h>
 
+int nfind(char* string, char* pattern){
+    int m = strlen(string)-1;
+    int n = strlen(pattern)-1;
+    
+    int start = 0;
+    int end = n;
+    
+    int j = 0;
+    
+    for(int i = 0; end <= m; start++, end++){
+        if(string[end] == pattern[n]){
+            for(i = start,j = 0; j <= n && string[i] == pattern[j]; i++, j++);
+            if(j == n+1) printf("index : %d\n", start);
+        }
+    }
+    if(end == m) printf("not found.");
+}
+
 void solve(char* pattern, int* arr, int n){
     arr[0] = 0;
     int start = 0;
