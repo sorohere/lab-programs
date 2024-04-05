@@ -1,61 +1,79 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Queue {
-    int *arr;
-    int rear, front;
-    int size;
-    int capacity;
-} queue;
+int* arr;
+int size;
+int capacity;
+int rear;
+int front;
 
-queue* init(int size) {
-    queue* q = (queue*)malloc(sizeof(queue));
-    q->arr = (int*)malloc(size * sizeof(int));
-    q->size = 0;
-    q->front = -1;
-    q->rear = -1;
-    q->capacity = size;
-
-    return q;
+void init(int cap){
+    arr = (int*)malloc(cap*sizeof(int));
+    size = 0;
+    capacity = cap;
+    rear = -1;
+    front = -1;
 }
 
-void insert(queue* q, int key) {
-    if (q->size == q->capacity) return;
-    q->rear = (q->rear + 1) % q->capacity;
-    q->arr[q->rear] = key;
-    q->size++;
-}
-
-void pop(queue* q) {
-    if (q->size == 0) return;
-    q->front = (q->front + 1) % q->capacity;
-    int element = q->arr[q->front];
-    q->size--;
-    printf("popped : %d\n", element);
-}
-
-void display(queue* q) {
-    for (int i = q->front + 1; i < q->front + q->size + 1; i++) {
-        printf("%d ", q->arr[i % q->capacity]);
+void enqueue(int key){
+    if(size == capacity){
+        printf("overflow.\n");
+        capacity *= 2;
+        int* temp = (int*)malloc(capacity*sizeof(int));
+        int j = 0;
+        for(int i = front+1; i < front+1 + capacity/2; i++){
+            temp[j++] = arr[i%(capacity/2)];
+        }
+        
+        front = -1;
+        rear = size-1;
+        int* dummy = arr;
+        free(dummy);
+        arr = temp;
     }
-    printf("\n");
+    rear = (rear+1)%capacity;
+    arr[rear] = key;
+    size++;
 }
 
-int main() {
-    queue* q = init(5);
+void dequeue(){
+    if(size == 0){
+        printf("empty.\n");
+        return;
+    }
+    front = (front+1)%capacity;
+    size--;
+    printf("%d : popped\n", arr[front]);
+}
 
-    insert(q, 2);
-    insert(q, 3);
-    insert(q, 5);
-    display(q);
-    insert(q, 9);
-    insert(q, 8);
-    display(q);
+void display(){
+    for(int i = front+1; i < front+1 + size; i++){
+        printf("%d ", arr[i%(capacity)]);
+    }
+}
 
-    pop(q);
-    pop(q);
+int main(){
+    init(5);
 
-    display(q);
-
+    enqueue(0);
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    enqueue(4);
+    dequeue();
+    dequeue();
+    enqueue(5);
+    enqueue(6);
+    enqueue(7);
+    enqueue(8);
+    enqueue(9);
+    enqueue(4);
+    dequeue();
+    enqueue(1);
+    enqueue(6);
+    enqueue(7);
+    
+    display();
+    
     return 0;
 }
