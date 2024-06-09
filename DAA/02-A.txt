@@ -1,0 +1,6 @@
+Q.) To prove that f(n)=7n+5 is O(n), we need to find constants c and such that f(n) ≤ c⋅g(n) for all n ≥ n0 , where g(n)=n.
+Ans : 7n+5 <= 7n + 5n
+           <=  12n
+      we know that f(n) ≤ c⋅g(n) here c = 12 and n0 = 1
+      thus 
+      7n+5 = O(n)
