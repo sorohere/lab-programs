@@ -1,0 +1,7 @@
+download ns3 3.39 fron google
+extracted
+
+in examples u will found the template codes copy that to ur workspace i.e scratch ( aaded lab.cc in scratch)
+open terminal for ns-3.39
+configure by comman """ ./ns3 configure """
+run by """ ./ns3 run filename --vis """
