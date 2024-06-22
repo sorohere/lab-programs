@@ -10,23 +10,16 @@ def bfs(graph, source):
             for neighbor in graph[current_node]:
                 if neighbor not in visited and neighbor not in queue:
                     queue.append(neighbor)
+                    
+                    
+graph = {}
 
-graph = {
-    '1': ['2', '3'],
-    '2': ['1', '3', '4', '5'],
-    '3': ['1', '2', '6', '7'],
-    '4': ['2', '5', '8', '9'],
-    '5': ['2', '4', '9'],
-    '6': ['3', '7'],
-    '7': ['3', '6'],
-    '8': ['4', '9'],
-    '9': ['4', '5', '8', '10'],
-    '10': ['9']
-}
+nodes = int(input("enter the total number nodes : "))
+for i in range(nodes):
+    key = int(input("enter the key : "))
+    value = list(map(int, input(f"Enter the nodes connected to {key}: ").split()))
+    graph[key] = value
+    
+print(graph)
 
-source = '1'
-
-print("\n")
-print("source node", source, "using BFS:")
-bfs(graph, source)
-print("\n")
+bfs(graph, 1)
