@@ -7,9 +7,12 @@ def bfs(graph, source):
         if current_node not in visited:
             print(current_node, end=' ')
             visited.append(current_node)
-            for neighbor in graph[current_node]:
-                if neighbor not in visited and neighbor not in queue:
-                    queue.append(neighbor)
+            
+            # for neighbor in graph[current_node]:
+            #     if neighbor not in visited and neighbor not in queue:
+            #         queue.append(neighbor)
+            
+            queue.extend(list(set(graph[current_node]) - set(queue)))
                     
                     
 graph = {}
