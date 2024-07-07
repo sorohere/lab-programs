@@ -3,32 +3,32 @@ import java.io.*;
 
 public class server {
     public static void main(String[] args) throws Exception {
-        ServerSocket sersock = new ServerSocket(4000);
+        ServerSocket s1 = new ServerSocket(4000);
         System.out.println("Server ready for connection");
 
-        Socket sock = sersock.accept();
+        Socket s2 = s.accept();
 
         System.out.println("Connection is successful and waiting for chatting");
 
-        InputStream istream = sock.getInputStream();
-        BufferedReader fileRead = new BufferedReader(new InputStreamReader(istream));
+        InputStream i = s1.getInputStream();
+        BufferedReader r1 = new BufferedReader(new InputStreamReader(istream));
 
-        String fname = fileRead.readLine();
-        BufferedReader contentRead = new BufferedReader(new FileReader(fname));
+        String fname = r1.readLine();
+        BufferedReader r2 = new BufferedReader(new FileReader(fname));
 
-        OutputStream ostream = sock.getOutputStream();
-        PrintWriter pwrite = new PrintWriter(ostream, true);
+        OutputStream o = s2.getOutputStream();
+        PrintWriter p = new PrintWriter(o, true);
 
         String str;
 
-        while ((str = contentRead.readLine()) != null) {
-            pwrite.println(str);
+        while ((str = r2.readLine()) != null) {
+            p.println(str);
         }
 
-        sock.close();
-        sersock.close();
-        pwrite.close();
-        fileRead.close();
-        contentRead.close();
+        s2.close();
+        s1.close();
+        p.close();
+        r1.close();
+        r2.close();
     }
 }
