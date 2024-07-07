@@ -3,29 +3,27 @@ import java.io.*;
 
 public class client {
     public static void main(String[] args) throws Exception {
-        Socket sock = new Socket("127.0.0.1", 4000);
+        Socket s = new Socket("127.0.0.1", 4000);
 
         System.out.print("Enter the filename : ");
-        BufferedReader keyRead = new BufferedReader(new InputStreamReader(System.in));
-
+        BufferedReader r1 = new BufferedReader(new InputStreamReader(System.in));
         String fname = keyRead.readLine();
 
-        OutputStream ostream = sock.getOutputStream();
-        PrintWriter pwrite = new PrintWriter(ostream, true);
-
-        pwrite.println(fname);
-        InputStream istream = sock.getInputStream();
-
-        BufferedReader socketRead = new BufferedReader(new InputStreamReader(istream));
+        OutputStream o = s.getOutputStream();
+        PrintWriter p = new PrintWriter(o, true);
+        p.println(fname);
+        
+        InputStream i = sock.getInputStream();
+        BufferedReader r2 = new BufferedReader(new InputStreamReader(istream));
 
         String str;
-        while ((str = socketRead.readLine()) != null) {
+        while ((str = r2.readLine()) != null) {
             System.out.println(str);
         }
 
-        pwrite.close();
-        socketRead.close();
-        keyRead.close();
-        sock.close();
+        p.close();
+        r2.close();
+        r1.close();
+        s.close();
     }
 }
