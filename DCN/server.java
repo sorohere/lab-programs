@@ -6,7 +6,7 @@ public class server {
         ServerSocket s1 = new ServerSocket(4000);
         System.out.println("Server ready for connection");
 
-        Socket s2 = s.accept();
+        Socket s2 = s1.accept();
 
         System.out.println("Connection is successful and waiting for chatting");
 
