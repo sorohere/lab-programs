@@ -14,7 +14,7 @@ public class client {
         p.println(fname);
         
         InputStream i = sock.getInputStream();
-        BufferedReader r2 = new BufferedReader(new InputStreamReader(istream));
+        BufferedReader r2 = new BufferedReader(new InputStreamReader(i);
 
         String str;
         while ((str = r2.readLine()) != null) {
