@@ -7,7 +7,7 @@ public class client {
 
         System.out.print("Enter the filename : ");
         BufferedReader r1 = new BufferedReader(new InputStreamReader(System.in));
-        String fname = keyRead.readLine();
+        String fname = r1.readLine();
 
         OutputStream o = s.getOutputStream();
         PrintWriter p = new PrintWriter(o, true);
