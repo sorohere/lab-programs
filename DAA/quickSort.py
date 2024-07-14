@@ -1,13 +1,17 @@
-def quicksort(arr):
+# best: O(nlogn) worst: O(n²)
+
+def quickSort(arr):
     if len(arr) <= 1:
         return arr
     else:
-        pivot = arr[len(arr) // 2]
+        pivot = arr[0]
+        
         left = [x for x in arr if x < pivot]
         middle = [x for x in arr if x == pivot]
         right = [x for x in arr if x > pivot]
-        return quicksort(left) + middle + quicksort(right)
+        
+        return quickSort(left) + middle + quickSort(right)
 
 arr = [64, 25, 12, 22, 11]
-sorted_arr = quicksort(arr)
-print("Sorted array is:", sorted_arr)
+ans = quickSort(arr)
+print("Sorted array is:", ans)
