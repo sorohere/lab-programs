@@ -30,14 +30,10 @@ def nQueens(arr, n, column, solutions):
             nQueens(arr, n, column + 1, solutions)
             arr[i][column] = 0  # Backtrack
 
-def solveNQueens(n):
-    arr = [[0] * n for _ in range(n)]
-    solutions = []
-    nQueens(arr, n, 0, solutions)
-    return solutions
-
 n = 4
-solutions = solveNQueens(n)
+arr = [[0] * n for _ in range(n)]
+solutions = []
+nQueens(arr, n, 0, solutions)
 print(f"total solutions for {n}-Queens problem: {len(solutions)}\n")
 for solution in solutions:
     for row in solution:
