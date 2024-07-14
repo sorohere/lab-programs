@@ -1,3 +1,5 @@
+# disjoints sets: cycle, time: O(ElogE)
+
 def find(parent, i):
     if parent[i] == i:
         return i
