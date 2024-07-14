@@ -12,11 +12,7 @@ def dijkstra(V, edges, S):
     unvisited = set(range(V))
     
     while unvisited:
-        u = min(unvisited, key=lambda vertex: dist[vertex])
-        
-        if dist[u] == float('inf'):
-            break
-        
+        u = min(unvisited, key=lambda vertex: dist[vertex])  # if dist[u] == inf: break
         unvisited.remove(u)
         
         for v, weight in adj[u]:
