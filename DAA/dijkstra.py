@@ -1,3 +1,5 @@
+# best: O((V+E)logV) worst: O(V²)
+
 def dijkstra(V, edges, S):
     # Create adjacency list
     adj = [[] for i in range(V)]
