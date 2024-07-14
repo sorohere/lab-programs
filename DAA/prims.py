@@ -1,39 +1,40 @@
 import heapq
 
-def prims(graph, start):
-    mst = []
+def prim(V, edges, start):
+    adj = [[] for _ in range(V)]
+    for u, v, wt in edges:
+        adj[u].append((v, wt))
+        adj[v].append((u, wt))  # For undirected graph
+    
+    min_heap = [(0, start)]  # (weight, vertex)
     visited = set()
-    min_heap = [(0, start, None)] 
+    mst_cost = 0
 
     while min_heap:
-        weight, current, parent = heapq.heappop(min_heap)
-        if current not in visited:
-            visited.add(current)
-            if parent is not None:
-                mst.append((parent, current, weight))
-            for neighbor, edge_weight in graph[current].items():
-                if neighbor not in visited:
-                    heapq.heappush(min_heap, (edge_weight, neighbor, current))
+        weight, u = heapq.heappop(min_heap)
+        
+        if u in visited:
+            continue
+            
+        visited.add(u)
+        mst_cost += weight
+        
+        for v, wt in adj[u]:
+            if v not in visited:
+                heapq.heappush(min_heap, (wt, v))
     
-    return mst
+    return mst_cost
 
-graph = {}
-num_edges = int(input("Enter the number of edges: "))
+# Example usage
+V = 5  # Number of vertices
+edges = [
+    (0, 1, 5),
+    (1, 2, 20),
+    (1, 3, 10),
+    (3, 4, 5),
+    (2, 4, 1)
+]
+start_vertex = 0  # Starting vertex for Prim's algorithm
 
-for _ in range(num_edges):
-    u, v, w = input("Enter the edge (format: u v w): ").split()
-    w = int(w)
-    if u not in graph:
-        graph[u] = {}
-    if v not in graph:
-        graph[v] = {}
-    graph[u][v] = w
-    graph[v][u] = w
-
-start = input("Enter the start node: ")
-
-mst = prims(graph, start)
-
-print("\nMinimum Spanning Tree:")
-for u, v, weight in mst:
-    print(f"{u} - {v}: {weight}")
+mst_cost = prim(V, edges, start_vertex)
+print("Minimum Cost of Spanning Tree:", mst_cost)
