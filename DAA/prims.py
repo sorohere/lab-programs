@@ -1,27 +1,31 @@
-import heapq
-
 def prim(V, edges, start):
     adj = [[] for _ in range(V)]
     for u, v, wt in edges:
         adj[u].append((v, wt))
-        adj[v].append((u, wt))  # For undirected graph
+        adj[v].append((u, wt))
     
-    min_heap = [(0, start)]  # (weight, vertex)
-    visited = set()
+    min_edge = [float('inf')] * V
+    min_edge[start] = 0
+    in_mst = [False] * V
     mst_cost = 0
-
-    while min_heap:
-        weight, u = heapq.heappop(min_heap)
+    
+    for _ in range(V):
+        min_weight = float('inf')
+        u = -1
+        for v in range(V):
+            if not in_mst[v] and min_edge[v] < min_weight:
+                min_weight = min_edge[v]
+                u = v
         
-        if u in visited:
-            continue
-            
-        visited.add(u)
-        mst_cost += weight
+        if u == -1:
+            break
+        
+        in_mst[u] = True
+        mst_cost += min_weight
         
         for v, wt in adj[u]:
-            if v not in visited:
-                heapq.heappush(min_heap, (wt, v))
+            if not in_mst[v] and wt < min_edge[v]:
+                min_edge[v] = wt
     
     return mst_cost
 
