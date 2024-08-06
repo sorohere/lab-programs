@@ -1,7 +1,7 @@
 #  Time Complexity: O(n^2) where n is the number of elements in the input array.
 
 def Smatch(Mpreference, Wpreference):
-    free_men = list(men_prefs.keys())
+    free_men = list(Mpreference.keys())
     matching = {}
     
     while free_men:
