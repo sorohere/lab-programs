@@ -1,17 +1,12 @@
-def dfs(graph, source):
-    visited = []
-    
-    def dfs_recursive(node):
-        if node not in visited:
-            print(node, end=' ')
-            visited.append(node)
-            for neighbor in graph.get(node, []):
-                if neighbor not in visited:
-                    dfs_recursive(neighbor)
-    
-    dfs_recursive(source)
+def dfs_recursive(graph, node, visited):
+    if node not in visited:
+        print(node)
+        visited.append(node)  
+        
+        for neighbor in graph[node]:
+            dfs_recursive(graph, neighbor, visited)
 
-# Example usage
+
 graph = {}
 
 nodes = int(input("Enter the total number of nodes: "))
@@ -22,4 +17,5 @@ for i in range(nodes):
     
 print("Graph:", graph)
 
-dfs(graph, 1)
+visited = []
+dfs_recursive(graph, 1, visited)
