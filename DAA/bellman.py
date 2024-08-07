@@ -3,7 +3,7 @@ def bellman_ford(vertices, src, graph):
     dist = {vertex: float('inf') for vertex in vertices}
     dist[src] = 0
 
-    for _ in range(V - 1):
+    for i in range(V - 1):
         for u, v, w in graph:
             if dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
