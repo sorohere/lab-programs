@@ -1,15 +1,16 @@
 # best: O((V+E)logV) worst: O(V²)
 
 def dijkstra(V, edges, S):
-    # Create adjacency list
-    adj = [[] for i in range(V)]
+    adj = {i:[] for i in V}
+    
     for u, v, wt in edges:
         adj[u].append((v, wt))
         adj[v].append((u, wt))  # For undirected graph
+        
 
-    dist = [float('inf')] * V
+    dist = {x : float('inf') for x in vertex}
     dist[S] = 0
-    unvisited = set(range(V))
+    unvisited = [i for i in V]
     
     while unvisited:
         u = min(unvisited, key=lambda vertex: dist[vertex])  # if dist[u] == inf: break
@@ -23,12 +24,20 @@ def dijkstra(V, edges, S):
     return dist
 
 v, e = list(map(int, input("enter the no. of vertex and edges: ").split()))
-edges = []
-for i in range(e):
-    edge = list(map(int, input("enter edge (u, v, wt): ").split()))
-    edges.append(edge)
+graph = []
+vertex = []
 
-source = 0
-dist = dijkstra(v, edges, source)
+for i in range(e):
+    temp = input("enter (u, v, w): ").split()
+    if temp[0] not in vertex:
+        vertex.append(temp[0])
+    if temp[1] not in vertex:
+        vertex.append(temp[1])
+        
+    temp[2] = int(temp[2])
+    graph.append(temp)
+
+source = '1'
+dist = dijkstra(vertex, graph, source)
     
 print(dist)
