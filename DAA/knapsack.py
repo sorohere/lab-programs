@@ -1,29 +1,32 @@
-def knapsack_recursive(ind, W, weights, values, dp):
-    if ind == 0:
-        if weights[0] <= W:
-            return values[0]
-        return 0
+def knapsack(weights, values, maxweight, num):
+    M = [[0] * (maxweight + 1) for _ in range(num + 1)]
 
-    if dp[ind][W] != -1:
-        return dp[ind][W]
+    for i in range(1, num + 1):
+        for w in range(1, maxweight + 1):
+            if weights[i] > w:
+                M[i][w] = M[i - 1][w]
+            else:
+                M[i][w] = max(M[i - 1][w], M[i - 1][w - weights[i]] + values[i])
 
-    not_take = knapsack_recursive(ind - 1, W, weights, values, dp)
-    take = float('-inf')
-    if weights[ind] <= W:
-        take = values[ind] + knapsack_recursive(ind - 1, W - weights[ind], weights, values, dp)
+    return M
 
-    dp[ind][W] = max(take, not_take)
-    return dp[ind][W]
+def FindSolution(M, num, maxweight):
+  included = []
+  while num:
+    if weights[num] <= maxweight and values[num] + M[num-1][maxweight-weights[num]] > M[num-1][maxweight]:
+      included.append((weights[num],values[num]))
+      maxweight -= weights[num]
+    num -= 1
+  return included
 
-def knapsack(weights, values, max_weight):
-    n = len(weights)
-    dp = [[-1 for _ in range(max_weight + 1)] for _ in range(n)]
-    print(dp)
-    return knapsack_recursive(n - 1, max_weight, weights, values, dp)
+num = int(input('Enter the number of items: '))
+weights = [0] * (num + 1)
+values = [0] * (num + 1)
 
-# Example usage
-weights = [1, 2, 3, 2, 4, 5, 6, 7]
-values = [1, 2, 3, 4, 5, 8, 13, 21]
-max_weight = 10
+for i in range(1, num + 1):
+    weights[i], values[i] = map(int, input(f"Enter the (weight, value) of item {i}: ").split())
 
-print(f"Maximum value for the knapsack problem is: {knapsack(weights, values, max_weight)}")
+maxweight = int(input('Enter the maximum weight: '))
+M = knapsack(weights, values, maxweight, num)
+print('Maximum value: ', M[num][maxweight])
+print('Items included: ', FindSolution(M, num, maxweight))
