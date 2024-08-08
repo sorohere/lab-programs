@@ -1,24 +1,33 @@
-def tsp(graph, v, curr_pos, n, count, cost, min_cost):
-    if count == n and graph[curr_pos][0]:
-        min_cost[0] = min(min_cost[0], cost + graph[curr_pos][0])
+def TSP(u,cost,minCost):
+    if False not in visited: # All vertices are visited
+        if adj[u][0]:   # If there is an edge from last vertex to first vertex
+            cost += adj[u][0]
+            minCost[0] = min(cost,minCost[0])
         return
 
-    for i in range(n):
-        if v[i] == False and graph[curr_pos][i]:
-            v[i] = True
-            tsp(graph, v, i, n, count + 1, cost + graph[curr_pos][i], min_cost)
-            v[i] = False
+    for v in range(V):
+        if not visited[v] and adj[u][v]:   # If vertex v is not visited and there is an edge from u to v
+            visited[v] = True
+            TSP(v, cost+adj[u][v], minCost)
+            visited[v] = False
 
-n = 4
-graph = [[0, 10, 15, 20],
-        [10, 0, 35, 25],
-        [15, 35, 0, 30],
-        [20, 25, 30, 0]]
-    
-v = [False for i in range(n)]
-v[0] = True
-min_cost = [float('inf')]
-    
-tsp(graph, v, 0, n, 1, 0, min_cost)
-    
-print("The minimum cost is", min_cost[0])
+
+V,E = map(int,input("Enter no. of vertices and edges : ").split())
+adj = [[0]*V for _ in range(V)]
+visited = [False]*V
+for i in range(E):
+    u,v,wt = map(int,input(f"Edge-{i+1} : ").split())
+    adj[u][v] = adj[v][u] = wt
+
+minCost = [float('inf')]
+TSP(0,0,minCost)
+print("minCost : ",minCost[0])
+
+# Edge-1 : 0 1 2
+# Edge-2 : 0 4 5
+# Edge-3 : 0 3 12
+# Edge-4 : 1 2 4
+# Edge-5 : 1 3 8
+# Edge-6 : 2 3 3
+# Edge-7 : 2 4 3
+# Edge-8 : 3 4 10
