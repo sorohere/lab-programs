@@ -1,34 +1,33 @@
-def primsAlgo(graph, source):
-    visited = []
+def prims(adj, start, ver):
     edges = []
     ans = []
-    mstCost = 0
-
-    visited.append(source)
-    for vertex in graph[source]:
-        edges.append((source, vertex[0], vertex[1]))
-
+    mincost = 0
+    visited = []
+    
+    visited.append(start)
+    for v, w in adj[start]:
+        edges.append((start, v, w))
+    
     while edges:
-        u, v, w = findMin(edges)
+        u, v, w = getmin(edges)
         if v not in visited:
             visited.append(v)
             ans.append((u, v, w))
-            mstCost += w
-
-            for vertex in graph[v]:
-                if vertex[0] not in visited:
-                    edges.append((v, vertex[0], vertex[1]))
-
-    return ans, mstCost
-
-def findMin(edges):
-    min_edge = edges[0]
-    for edge in edges:
-        if edge[2] < min_edge[2]:
-            min_edge = edge
-
-    edges.remove(min_edge)
-    return min_edge
+            mincost += w
+            
+            for i, j in adj[v]:
+                    edges.append((v, i, j))
+                    
+    return mincost, ans
+    
+def getmin(edges):
+    mini = edges[0]
+    for i in edges:
+        if mini[2] > i[2]:
+            mini = i
+    
+    edges.remove(mini)        
+    return mini
 
 num = int(input("Enter the number of edges: "))
 graph = {}
