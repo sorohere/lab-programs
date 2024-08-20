@@ -2,7 +2,7 @@ ans = []
 delay = []
 time = 0
 
-list
+list.sort(key = lambda x : x[1])
 
 while list:
   x = list.pop(0)
