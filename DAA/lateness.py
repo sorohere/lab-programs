@@ -15,7 +15,5 @@ while list:
     delay.append(end - x[1])
   else:
     delay.append(0)
-
-
-  
+    
   time = end
