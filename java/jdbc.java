@@ -14,6 +14,9 @@ public class emp {
     String q4 = "select * from emp";
     String q5 = "select id, fname from emp where project='webdev'";
 
+    String q6 = "DELETE FROM emp WHERE Model = ? AND Year = ?";
+    String q7 = "select * from emp";
+
     try {
       Connection conn = DriverManager.getConnection(url, user, pass);
       Statement stmt = conn.createStatement();
@@ -30,6 +33,18 @@ public class emp {
             
       ResultSet rs2 = stmt.executeQuery(q5);
       while(rs.next()) System.out.println(rs.getInt("ID") + rs.getString("FName") + rs.getString("LName") + rs.getString("Project") + rs.getFloat("Salary"));
+
+            
+      PreparedStatement pstmt = conn.prepareStatement(q6);
+      pstmt.setString(1, "ABC");
+      pstmt.setInt(2, 2010);
+      int rowsDeleted = pstmt.executeUpdate();
+      System.out.println("Number of rows deleted: " + rowsDeleted);
+
+      pstmt = conn.prepareStatement(q7);
+      ResultSet rs = pstmt.executeQuery()
+      while(rs.next()) System.out.println(rs.getInt("ID") + rs.getString("FName") + rs.getString("LName") + rs.getString("Project") + rs.getFloat("Salary"));
+      
     }
     catch(SQLException e) e.printStackTrace();
   }
