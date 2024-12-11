@@ -3,6 +3,12 @@ import java.sql.*;
 
 public class emp {
   public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in)
+
+    int deptID = scanner.nextInt();
+    scanner.nextLine();
+    String deptName = scanner.nextLine();
+      
     String url = "jdbc:mysql://localhost:3306/";
     String user = "root";
     String pass = "";
