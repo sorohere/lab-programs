@@ -1,0 +1,102 @@
+// FacultySubjectsServlet.java
+
+package myPack;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.sql.*;
+
+public class FacultySubjectsServlet extends HttpServlet {
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/FacultySubjects";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASSWORD = "";
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            String query = "SELECT Sub_ID, Sub_Name FROM subjects WHERE Faculty_ID = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setInt(1, facultyId);
+                ResultSet rs = stmt.executeQuery();
+
+                out.println("<h2>Subjects Allotted to Faculty ID: " + facultyId + "</h2>");
+                out.println("<table border='1'><tr><th>Subject ID</th><th>Subject Name</th></tr>");
+                while (rs.next()) {
+                    int subId = rs.getInt("Sub_ID");
+                    String subName = rs.getString("Sub_Name");
+                    out.println("<tr><td>" + subId + "</td><td>" + subName + "</td></tr>");
+                }
+                out.println("</table>");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            out.println("<p>Error: " + e.getMessage() + "</p>");
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        int subId = Integer.parseInt(request.getParameter("subId"));
+        String subName = request.getParameter("subName");
+        int facultyId = Integer.parseInt(request.getParameter("facultyId"));
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD)) {
+            String query = "UPDATE subjects SET Sub_Name = ?, Faculty_ID = ? WHERE Sub_ID = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, subName);
+                stmt.setInt(2, facultyId);
+                stmt.setInt(3, subId);
+
+                int rowsUpdated = stmt.executeUpdate();
+                out.println("<h2>Rows Updated: " + rowsUpdated + "</h2>");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            out.println("<p>Error: " + e.getMessage() + "</p>");
+        }
+    }
+}
+
+
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Subjects</title>
+</head>
+<body>
+
+    <h1>View Subjects Allotted to Faculty</h1>
+    <form action="FacultySubjectsServlet" method="get">
+        Faculty ID: <input type="text" name="facultyId" required>
+        <input type="submit" value="View Subjects">
+    </form>
+
+    <hr>
+
+    <h1>Update Subject Details</h1>
+    <form action="FacultySubjectsServlet" method="post">
+        Subject ID: <input type="text" name="subId" required><br>
+        Subject Name: <input type="text" name="subName" required><br>
+        Faculty ID: <input type="text" name="facultyId" required><br>
+        <input type="submit" value="Update Subject">
+    </form>
+
+</body>
+</html>
+

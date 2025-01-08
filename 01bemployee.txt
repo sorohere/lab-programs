@@ -1,0 +1,49 @@
+// PayrollServlet.java
+
+package myPack;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+import java.sql.*;
+
+@WebServlet("/PayrollServlet")
+public class PayrollServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html");
+        String employeeName = request.getParameter("employeeName");
+        double hoursWorked = Double.parseDouble(request.getParameter("hoursWorked"));
+        double hourlyRate = Double.parseDouble(request.getParameter("hourlyRate"));
+        
+        double grossPay = hoursWorked * hourlyRate;
+        double tax = grossPay * 0.20;
+        double netPay = grossPay - tax;
+
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>Payroll Statement</h1>");
+        out.println("<p>Employee: " + employeeName + "</p>");
+        out.println("<p>Gross Pay: $" + grossPay + "</p>");
+        out.println("<p>Tax (20%): $" + tax + "</p>");
+        out.println("<p>Net Pay: $" + netPay + "</p>");
+        out.println("</body></html>");
+    }
+}
+
+
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head><title>Employee Payroll</title></head>
+<body>
+    <h1>Enter Employee Details</h1>
+    <form action="PayrollServlet" method="post">
+        Employee Name: <input type="text" name="employeeName" required><br>
+        Hours Worked: <input type="number" name="hoursWorked" step="0.1" required><br>
+        Hourly Rate ($): <input type="number" name="hourlyRate" step="0.01" required><br>
+        <button type="submit">Generate Payroll</button>
+    </form>
+</body>
+</html>
