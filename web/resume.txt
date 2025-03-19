@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saurabh Kushwaha - Resume</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="container">
+        <div id="banner">
+            <div class="banner-content">
+                <h1>Saurabh Kushwaha</h1>
+                <p>Machine Learning Researcher & Developer</p>
+                <p class="contact">
+                    <a href="mailto:saurabh.kushwaha.dev@gmail.com">saurabh.kushwaha.dev@gmail.com</a> | 
+                    <a href="tel:+919949022447">+91 9949022447</a> | 
+                    <a href="https://www.linkedin.com/in/sorohere" target="_blank">LinkedIn</a> | 
+                    <a href="https://github.com/sorohere" target="_blank">GitHub</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="nav">
+            <a href="#">home</a>
+            <a href="#">mysite</a>
+            <a href="#">work</a>
+            <a href="#">Link 4</a>
+            <a href="#">Link 5</a>
+        </div>
+          
+
+        <div id="content">
+            <div class="box about-me">
+                <h2>About Me</h2>
+                <p>I am a Machine Learning Researcher and Developer with a strong background in Deep Learning, Computer Vision, and Natural Language Processing. I am passionate about research and innovation in the fields of AI, particularly in large language models and optimization algorithms.</p>
+            </div>
+
+            <div class="box experience">
+                <h2>Experience</h2>
+                <div class="job">
+                    <h3>Research Intern</h3>
+                    <p><strong>Indian Institute of Science (IISc)</strong> | Dec 2022 - Present | Bengaluru, Karnataka, India</p>
+                    <ul>
+                        <li>Researched and implemented advanced Voice Activity Detection (VAD) techniques to improve accuracy in detecting speech segments.</li>
+                        <li>Benchmarked various VAD models across multiple languages to evaluate performance.</li>
+                        <li>Analyzed results to identify the most effective models for multilingual applications.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="box education">
+                <h2>Education</h2>
+                <div class="degree">
+                    <h3>B. Tech. in Computer Science and Engineering</h3>
+                    <p><strong>MS Ramaiah Institute of Technology</strong> | 2019 - 2023 | CGPA: 9.40</p>
+                </div>
+            </div>
+
+            <div class="box projects">
+                <h2>Projects</h2>
+                <div class="project">
+                    <h3>Speech-SOS</h3>
+                    <p><strong>Technologies:</strong> Stanford CoreNLP, Assembly AI, Llama2 13B</p>
+                    <p>Developed an environment monitoring system that continuously performs advanced threat detection. Utilized Stanford CoreNLP for accurate sentence separation, Assembly AI for speech-to-text conversion, and Llama2 13B for real-time speech analysis. Integrated an SOS messaging system to notify authorities with detailed situation scenarios.</p>
+                </div>
+                <div class="project">
+                    <h3>Real-Time Hand Gesture Recognition</h3>
+                    <p><strong>Technologies:</strong> Python, MediaPipe, Keras, Llama2 13B</p>
+                    <p>Developed a real-time hand gesture recognition system using MediaPipe for hand position detection. Trained a Keras model on labeled datasets to enable customizable gesture recognition. Integrated Llama2 13B to refine gesture predictions and provide coherent sentence formation in real-time.</p>
+                </div>
+                <div class="project">
+                    <h3>Face Recognition</h3>
+                    <p><strong>Technologies:</strong> Python, Computer Vision, DeepFace, Pandas, OpenCV</p>
+                    <p>Created a face recognition model leveraging YOLOv8 for face detection and DeepFace for recognition. The system differentiates between known and unknown faces, providing accurate identification for each category.</p>
+                </div>
+            </div>
+
+            <div class="box achievements">
+                <h2>Achievements</h2>
+                <ul>
+                    <li>Google FooBar: An invite-only coding challenge by Google (Dec 2022 - Present)</li>
+                    <li>LeetCode: Earned the prestigious 100-Days and 50-Days badges.</li>
+                    <li>Leetcode: Achieved a 2.5-Star rating on soro.leetcode.com</li>
+                    <li>Foobar Challenge: Level 2 on foobar.withgoogle.com</li>
+                </ul>
+            </div>
+
+            <div class="box skills">
+                <h2>Technical Skills</h2>
+                <h3>Languages:</h3>
+                <ul>
+                    <li>Python, C++, C, Java</li>
+                </ul>
+                <h3>Developer Tools:</h3>
+                <ul>
+                    <li>VS Code, Jupyter Notebook, Google Colab</li>
+                </ul>
+                <h3>Technologies & Frameworks:</h3>
+                <ul>
+                    <li>PyTorch, Scikit-Learn, OpenCV, LangChain, Streamlit, Gradio, HuggingFace, Pandas, Numpy, Git, GitHub</li>
+                </ul>
+                <h3>Deep Learning:</h3>
+                <ul>
+                    <li>YOLOv8, DeepFace, MediaPipe</li>
+                </ul>
+                <h3>Web Scraping:</h3>
+                <ul>
+                    <li>Requests</li>
+                </ul>
+                <h3>Relevant Coursework:</h3>
+                <ul>
+                    <li>Data Structures, Analysis of Algorithms, Discrete Mathematics</li>
+                </ul>
+            </div>
+
+            <div class="box areas-of-interest">
+                <h2>Areas of Interest</h2>
+                <ul>
+                    <li>Machine Learning</li>
+                    <li>Deep Learning</li>
+                    <li>Data Science</li>
+                    <li>Large Language Models</li>
+                    <li>Research Work</li>
+                    <li>Optimization Algorithms</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="footer">
+            <p>made with gpts and love @sorohere.</p>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+#container {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#banner {
+    background-color: #0066cc;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+#banner .banner-content h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+#banner .banner-content p {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+#banner .contact a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+#banner .contact a:hover {
+    text-decoration: underline;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  #nav a {
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  #nav a:hover {
+    color: #007bff;
+  }
+  
+
+.box {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+.box h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.box p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.box ul {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.box ul li {
+    font-size: 1.1em;
+    color: #444;
+}
+
+/* Experience Section */
+.experience .job {
+    margin-bottom: 15px;
+}
+
+.experience .job h3 {
+    font-size: 1.6em;
+    color: #333;
+}
+
+.experience .job p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.experience .job ul {
+    margin-top: 10px;
+}
+
+.projects .project {
+    margin-bottom: 20px;
+}
+
+.projects .project h3 {
+    font-size: 1.6em;
+    color: #333;
+}
+
+.projects .project p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.skills ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.skills ul li {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+#footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 30px;
+}
+
+#footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
