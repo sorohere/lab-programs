@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo Classes and Elements Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <p>First paragraph: Hover me!</p>
+    <p>Second paragraph: Click me!</p>
+    <p>Third paragraph: Focus me!</p>
+    <p>Fourth paragraph: I'm the first one!</p>
+    <p>Fifth paragraph: I'm the last one!</p>
+    <p>Sixth paragraph: Notice the arrow before me.</p>
+    <p>Seventh paragraph: Look at the arrow after me.</p>
+    <p>Eighth paragraph: The first letter is huge.</p>
+    <p>Ninth paragraph: The first line is green.</p>
+    <p>Tenth paragraph: Try to select me!</p>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+p:nth-child(1):hover {
+    color: red;
+}
+
+p:nth-child(2):active {
+    font-weight: bold;
+}
+
+p:nth-child(3):focus {
+    background-color: rgb(0, 255, 98);
+}
+
+p:nth-child(4):first-child {
+    text-transform: uppercase;
+}
+
+p:nth-child(5):last-child {
+    font-style: italic;
+}
+
+p:nth-child(6)::before {
+    content: "→ ";
+}
+
+p:nth-child(7)::after {
+    content: " ←";
+}
+
+p:nth-child(8)::first-letter {
+    font-size: 2em;
+}
+
+p:nth-child(9)::first-line {
+    color: green;
+}
+
+p:nth-child(10)::selection {
+    background-color: orange;
+}
