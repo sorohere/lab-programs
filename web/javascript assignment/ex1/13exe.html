@@ -4,10 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random Number Average</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5em;
+        }
+
+        label {
+            font-size: 1.2em;
+        }
+
+        input[type="number"] {
+            padding: 8px;
+            font-size: 1em;
+            margin-top: 10px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #555;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <h1>Random Number Average</h1>
-    <label for="numCount">How many random numbers?</label>
+    <label for="numCount">How many random numbers?</label><br>
     <input type="number" id="numCount"><br>
     <button onclick="generateAndAverage()">Generate & Average</button>
     <p id="results"></p>
@@ -31,7 +87,7 @@
             }
 
             const average = sum / count;
-            document.getElementById("results").textContent = "Numbers: " + numbers.join(", ") + "<br>Average: " + average;
+            document.getElementById("results").innerHTML = "Numbers: " + numbers.join(", ") + "<br>Average: " + average;
         }
     </script>
 </body>
