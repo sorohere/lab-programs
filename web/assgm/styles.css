@@ -1,0 +1,39 @@
+p:nth-child(1):hover {
+    color: red;
+}
+
+p:nth-child(2):active {
+    font-weight: bold;
+}
+
+p:nth-child(3):focus {
+    background-color: rgb(0, 255, 98);
+}
+
+p:nth-child(4):first-child {
+    text-transform: uppercase;
+}
+
+p:nth-child(5):last-child {
+    font-style: italic;
+}
+
+p:nth-child(6)::before {
+    content: "→ ";
+}
+
+p:nth-child(7)::after {
+    content: " ←";
+}
+
+p:nth-child(8)::first-letter {
+    font-size: 2em;
+}
+
+p:nth-child(9)::first-line {
+    color: green;
+}
+
+p:nth-child(10)::selection {
+    background-color: orange;
+}
