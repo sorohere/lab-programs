@@ -1,84 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Registration Form</title>
+  <title>Array Sum and Multiply</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-  <h2>Registration Form</h2>
-  <form id="registrationForm" onsubmit="return validateForm()">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name">
-    
-    <label for="username">User Name:</label>
-    <input type="text" id="username" name="username" required>
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    
-    <label for="confirmPassword">Confirm Password:</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required>
-    
-    <label for="yearOfBirth">Year of Birth:</label>
-    <input type="number" id="yearOfBirth" name="yearOfBirth" placeholder="e.g., 1985" required>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    
-    <label>
-      <input type="checkbox" id="terms" name="terms" required>
-      <span class="checkbox-label">I agree to the terms and conditions</span>
-    </label>
-    
-    <button type="submit">Register</button>
-  </form>
+
+  <div class="container">
+    <h2>Array Sum & Multiply Calculator</h2>
+    <label for="numberArray">Enter numbers (comma-separated):</label>
+    <input type="text" id="numberArray" placeholder="e.g., 1, 2, 3, 4">
+    <button onclick="calculate()">Calculate</button>
+    <p id="sumResult"></p>
+    <p id="multiplyResult"></p>
+  </div>
 
   <script>
-    function validateForm() {
-      // Get form fields
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-      const yearOfBirth = document.getElementById("yearOfBirth").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const terms = document.getElementById("terms").checked;
-      
-      // Check that username, password, confirmPassword, email are not empty
-      if (!username || !password || !confirmPassword || !email) {
-        alert("User name, password, confirm password, and email must not be empty.");
-        return false;
+    function sum(numbers) {
+      let total = 0;
+      for (let num of numbers) {
+        total += num;
       }
-      
-      // Check if password and confirmPassword match
-      if (password !== confirmPassword) {
-        alert("Password and confirm password do not match.");
-        return false;
+      return total;
+    }
+
+    function multiply(numbers) {
+      let product = 1;
+      for (let num of numbers) {
+        product *= num;
       }
-      
-      // Check email format using a simple regular expression
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
+      return product;
+    }
+
+    function calculate() {
+      const inputArray = document.getElementById("numberArray").value;
+      const numbers = inputArray.split(",").map(num => parseFloat(num.trim()));
+
+      if (numbers.some(isNaN)) {
+        document.getElementById("sumResult").textContent = "Invalid input. Please enter numbers.";
+        document.getElementById("multiplyResult").textContent = "";
+        return;
       }
-      
-      // Validate Year of Birth: must be four digits and between 1900 and 2000
-      const year = parseInt(yearOfBirth, 10);
-      if (!/^\d{4}$/.test(yearOfBirth) || year < 1900 || year > 2000) {
-        alert("Year of birth must be a four-digit number between 1900 and 2000.");
-        return false;
-      }
-      
-      // Check that the terms checkbox is checked
-      if (!terms) {
-        alert("You must agree to the terms and conditions.");
-        return false;
-      }
-      
-      // If all validations pass, allow form submission (or handle registration)
-      alert("Registration successful!");
-      return true;
+
+      const sumResult = sum(numbers);
+      const multiplyResult = multiply(numbers);
+
+      document.getElementById("sumResult").textContent = "Sum: " + sumResult;
+      document.getElementById("multiplyResult").textContent = "Product: " + multiplyResult;
     }
   </script>
+
 </body>
 </html>

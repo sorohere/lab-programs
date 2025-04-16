@@ -1,11 +1,100 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
 <head>
-    <title>Hover Alert</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Christmas Card Translator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ffefba, #ffffff);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #c0392b;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 16px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1e8449;
+    }
+
+    h2#result {
+      margin-top: 20px;
+      color: #2c3e50;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>🎄 Christmas Card Translator</h1>
+    <label for="messageInput">Enter your message in English:</label>
+    <input type="text" id="messageInput" />
+    <button onclick="translateMessage()">Translate</button>
+    <h2 id="result"></h2>
+  </div>
 
-    <a href="#" onmouseover="alert('Welcome');">Hover for a welcome message</a>
+  <script>
+    const lexicon = {
+      "merry": "god",
+      "christmas": "jul",
+      "and": "och",
+      "happy": "gott",
+      "new": "nytt",
+      "year": "år"
+    };
 
+    function translateMessage() {
+      const input = document.getElementById('messageInput').value.toLowerCase();
+      const words = input.split(' ');
+      const translatedWords = words.map(word => lexicon[word] || word);
+      const translatedMessage = translatedWords.join(' ');
+      document.getElementById('result').innerText = translatedMessage;
+    }
+  </script>
 </body>
 </html>
