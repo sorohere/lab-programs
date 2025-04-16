@@ -1,50 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Array Sum and Multiply</title>
+  <title>Array Sum and Multiply</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
 
-<label for="numberArray">Enter numbers (comma-separated):</label>
-<input type="text" id="numberArray">
-<button onclick="calculate()">Calculate</button>
-<p id="sumResult"></p>
-<p id="multiplyResult"></p>
+  <div class="container">
+    <h2>Array Sum & Multiply Calculator</h2>
+    <label for="numberArray">Enter numbers (comma-separated):</label>
+    <input type="text" id="numberArray" placeholder="e.g., 1, 2, 3, 4">
+    <button onclick="calculate()">Calculate</button>
+    <p id="sumResult"></p>
+    <p id="multiplyResult"></p>
+  </div>
 
-<script>
-function sum(numbers) {
-  let total = 0;
-  for (let num of numbers) {
-    total += num;
-  }
-  return total;
-}
+  <script>
+    function sum(numbers) {
+      let total = 0;
+      for (let num of numbers) {
+        total += num;
+      }
+      return total;
+    }
 
-function multiply(numbers) {
-  let product = 1;
-  for (let num of numbers) {
-    product *= num;
-  }
-  return product;
-}
+    function multiply(numbers) {
+      let product = 1;
+      for (let num of numbers) {
+        product *= num;
+      }
+      return product;
+    }
 
-function calculate() {
-  const inputArray = document.getElementById("numberArray").value;
-  const numbers = inputArray.split(",").map(num => parseFloat(num.trim())); // Split, trim, and convert to numbers.
+    function calculate() {
+      const inputArray = document.getElementById("numberArray").value;
+      const numbers = inputArray.split(",").map(num => parseFloat(num.trim()));
 
-    if (numbers.some(isNaN)) {
+      if (numbers.some(isNaN)) {
         document.getElementById("sumResult").textContent = "Invalid input. Please enter numbers.";
         document.getElementById("multiplyResult").textContent = "";
         return;
+      }
+
+      const sumResult = sum(numbers);
+      const multiplyResult = multiply(numbers);
+
+      document.getElementById("sumResult").textContent = "Sum: " + sumResult;
+      document.getElementById("multiplyResult").textContent = "Product: " + multiplyResult;
     }
-
-  const sumResult = sum(numbers);
-  const multiplyResult = multiply(numbers);
-
-  document.getElementById("sumResult").textContent = "Sum: " + sumResult;
-  document.getElementById("multiplyResult").textContent = "Product: " + multiplyResult;
-}
-</script>
+  </script>
 
 </body>
 </html>

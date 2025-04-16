@@ -1,40 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Rövarspråket Translator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rövarspråket Translator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 350px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      font-size: 18px;
+      color: #444;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #outputText {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #555;
+      word-wrap: break-word;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Rövarspråket Translator</h1>
+    <label for="inputText">Enter text to translate:</label>
+    <input type="text" id="inputText" placeholder="Type here...">
+    <button onclick="translateText()">Translate</button>
+    <p id="outputText"></p>
+  </div>
 
-<label for="inputText">Enter text to translate:</label>
-<input type="text" id="inputText">
-<button onclick="translateText()">Translate</button>
-<p id="outputText"></p>
-
-<script>
-function translate(text) {
-  const vowels = "aeiouAEIOU";
-  let translatedText = "";
-  for (let char of text) {
-      if (('a' <= char && char <= 'z') || ('A' <= char && char <= 'Z')) {
+  <script>
+    function translate(text) {
+      const vowels = "aeiouAEIOU";
+      let translatedText = "";
+      for (let char of text) {
+        if ((char >= 'a' && char <= 'z') || (char >= 'A' && char <= 'Z')) {
           if (!vowels.includes(char)) {
-              translatedText += char + "o" + char;
+            translatedText += char + "o" + char;
           } else {
-              translatedText += char;
+            translatedText += char;
           }
-      } else {
+        } else {
           translatedText += char;
+        }
       }
-  }
-  return translatedText;
-}
+      return translatedText;
+    }
 
-function translateText() {
-  const inputText = document.getElementById("inputText").value;
-  const outputTextElement = document.getElementById("outputText");
-  const translated = translate(inputText);
-  outputTextElement.textContent = translated;
-}
-</script>
-
+    function translateText() {
+      const inputText = document.getElementById("inputText").value;
+      const outputTextElement = document.getElementById("outputText");
+      outputTextElement.textContent = translate(inputText);
+    }
+  </script>
 </body>
 </html>
