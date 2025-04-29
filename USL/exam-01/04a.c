@@ -7,7 +7,6 @@
 #include <fcntl.h>
 
 int main(int argc,char* argv[]){
-        int fd;
         struct stat statbuf_1;
         struct stat statbuf_2;
         struct utimbuf times;
