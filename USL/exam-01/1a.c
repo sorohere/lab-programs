@@ -44,3 +44,6 @@ int main(int argc, char *argv[]) {
     putchar('\n');
     exit(0);
 }
+
+
+// ./a.out t1.txt t2.txt
