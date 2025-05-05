@@ -1,0 +1,3 @@
+lseek(f, offset, destination)
+read (f, store, nob)
+write(f, store, nob)
