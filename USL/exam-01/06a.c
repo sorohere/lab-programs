@@ -8,17 +8,17 @@
 
 int main() {
     umask(0);
-    creat("demo.txt", 0666);  // rw-rw-rw-
+    creat("foo", 0644); 
+    umask(022);
+    creat("bar", 0666);
+
     return 0;
 }
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
 
 int main() {
-    chmod("demo.txt", 0777); // rwx------
+    chmod("foo", 0777);  
+    chmod("bar", 0600); 
+    
     return 0;
 }
-
