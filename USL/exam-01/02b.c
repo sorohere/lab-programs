@@ -19,3 +19,8 @@ int main(int argc, char *argv[])
 
 // ./a.out test.txt test2.txt
 // ./a.out test.txt test2.txt 1
+
+// ls -li sample.txt test.txt 
+// same inode for hard link
+
+
