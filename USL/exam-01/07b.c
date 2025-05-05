@@ -12,9 +12,9 @@ int main() {
         exit(0);
     } 
     else {
+        wait(NULL);  // <-- Solution: Clean up the child process
         printf("Parent process (PID: %d) sleeping\n", getpid());
         sleep(30);
-        // wait(NULL);     // solution
         printf("Parent exiting\n");
     }
 
