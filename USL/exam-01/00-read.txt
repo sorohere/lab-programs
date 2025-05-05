@@ -1,3 +1,10 @@
 lseek(f, offset, destination)
 read (f, store, nob)
 write(f, store, nob)
+
+
+O_WRONLY = 1
+O_CREAT = 64
+O_TRUNC = 512
+O_RDONLY = 0 (read-only mode)
+O_RDWR = 2 (read and write mode)
