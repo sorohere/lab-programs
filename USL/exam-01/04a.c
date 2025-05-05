@@ -7,26 +7,23 @@
 #include <time.h>
 
 int main(int argc, char* argv[]) {
-    struct stat statbuf_1;
-    struct stat statbuf_2;
+    struct stat s1, s2;
     struct utimbuf times;
 
-    stat(argv[1], &statbuf_1);
-    stat(argv[2], &statbuf_2);
+    stat(argv[1], &s1);
+    stat(argv[2], &s2);
 
     printf("Before Copying ...\n\n");
-    printf("Access Time %s \nModification Time %s\n", ctime(&statbuf_1.st_atime), ctime(&statbuf_1.st_mtime));
+    printf("Access Time: %sModification Time: %s\n", ctime(&s1.st_atime), ctime(&s1.st_mtime));
 
-    times.actime = statbuf_2.st_atime;
-    times.modtime = statbuf_2.st_mtime;
+    times.actime = s2.st_atime;
+    times.modtime = s2.st_mtime;
     utime(argv[1], &times);
 
-    stat(argv[1], &statbuf_1);
+    stat(argv[1], &s1);
     
-    printf("After Copying ...\n\n");
-    printf("Access Time %s \nModification Time %s\n", ctime(&statbuf_1.st_atime), ctime(&statbuf_1.st_mtime));
+    printf("\nAfter Copying ...\n\n");
+    printf("Access Time: %sModification Time: %s\n", ctime(&s1.st_atime), ctime(&s1.st_mtime));
 
     return 0;
 }
-
-// ./a.out test.txt test2.txt
