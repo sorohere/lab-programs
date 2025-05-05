@@ -11,8 +11,8 @@ int main(){
     dp = opendir("."); 
 
     while ((dir = readdir(dp)) != NULL){
-        int fd = open(dir->d_name, O_RDWR, 0777);
-        int n = lseek(fd, 0, SEEK_END);
+        int fd = open(dir->d_name, 0, 0777);
+        int n = lseek(fd, 0, 2);
         
         if (!n) unlink(dir->d_name);
     }
