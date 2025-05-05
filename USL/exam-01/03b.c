@@ -8,7 +8,7 @@
 #include<time.h>
 #include<sys/stat.h>
 
-int main(int argc,char* argv[])
+int main(int arg, char* argv[])
 {
         struct dirent *dir;
         struct stat mystat;
