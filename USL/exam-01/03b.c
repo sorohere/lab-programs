@@ -11,15 +11,15 @@
 int main(int arg, char* argv[])
 {
         struct dirent *dir;
-        struct stat mystat;
+        struct stat s;
         DIR *dp;
 
         dp = opendir(".");
 
         printf("--inode--mode-- uid--guid--access_time--Filename\n");
         while(dir = readdir(dp)){
-                stat(dir->d_name,&mystat);
-                printf("%llu %o %d %d %s %s\n", mystat.st_ino, mystat.st_mode, mystat.st_uid, mystat.st_gid, ctime(&mystat.st_atime), dir->d_name);
+                stat(dir->d_name,&s);
+                printf("%llu %o %d %d %s %s\n", s.st_ino, s.st_mode, s.st_uid, s.st_gid, ctime(&s.st_atime), dir->d_name);
         }
         
 }
