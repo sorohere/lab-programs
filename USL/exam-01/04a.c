@@ -18,8 +18,8 @@ int main(int argc, char* argv[]) {
 
     times.actime = s2.st_atime;
     times.modtime = s2.st_mtime;
+    
     utime(argv[1], &times);
-
     stat(argv[1], &s1);
     
     printf("\nAfter Copying ...\n\n");
