@@ -5,9 +5,9 @@
 #include <fcntl.h>
 #include <string.h>
 
-int main() {
+int main(int c, char **v) {
     // dup
-    int fd1 = open("dup_test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    int fd1 = open(v[1], 1 | 64 | 512, 0644);
     int fd2 = dup(fd1);
     printf("dup(): Original fd: %d, New fd: %d\n", fd1, fd2);
     write(fd1, "Line from fd1\n", 14);
@@ -16,7 +16,7 @@ int main() {
     close(fd2);
     
     // dup2
-    int fd3 = open("dup2_test.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    int fd3 = open(v[2], 1 | 64 | 512, 0644);
     int fd4 = 10;
     dup2(fd3, fd4);
     printf("dup2(): Original fd: %d, Specified fd: %d\n", fd3, fd4);
