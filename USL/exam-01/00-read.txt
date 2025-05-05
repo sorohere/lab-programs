@@ -2,14 +2,16 @@ lseek(f, offset, destination)
 read (f, store, nob)
 write(f, store, nob)
 
-
 O_WRONLY = 1
 O_CREAT = 64
 O_TRUNC = 512
 O_RDONLY = 0 (read-only mode)
 O_RDWR = 2 (read and write mode)
 
-
 SEEK_SET = 0
 SEEK_CUR = 1
 SEEK_END = 2
+
+wait(&st)
+wait(NULL)  // No status collected
+waitpid(pid, &st, 0)  // 0 = block parent untill child
