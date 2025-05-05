@@ -1,3 +1,5 @@
+// Write a C program to demonstrate the creation of soft links and  hard links.
+
 #include <stdio.h>
 #include <unistd.h>
 

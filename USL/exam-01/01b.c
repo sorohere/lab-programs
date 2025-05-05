@@ -1,3 +1,5 @@
+// Write a C program to create a child process and show how parent and child processes will share the text file and justify that both parent and child share the same file offset.
+
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -18,3 +20,5 @@ int main(int c, char **v) {
         printf("Parent: %s\n", b);
     }
 }
+
+// ./a.out test.txt

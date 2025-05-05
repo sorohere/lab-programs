@@ -1,3 +1,5 @@
+// Write a C program that takes the file name as an argument and prints the type of the given file.
+
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -18,3 +20,5 @@ int main(int argc, char *argv[]) {
     }
     return 0;
 }
+
+// ./a.out test.txt test2.txt

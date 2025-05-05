@@ -1,3 +1,5 @@
+// Write a program to read n characters from a file and append them back to the same file using dup2 function.
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -13,3 +15,5 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
+// ./a.out test.txt
