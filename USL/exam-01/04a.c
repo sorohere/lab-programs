@@ -1,4 +1,5 @@
-// Write a program to copy access and modification time of a file to another file using utime function.
+// Write a program to copy access and modification time of a file to another 
+// file using utime function.
 
 #include <stdio.h>
 #include <sys/stat.h>
