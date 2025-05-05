@@ -1,40 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/wait.h>
 
-int main() 
-{
-    int fd = open("test.txt", O_RDWR);
-    if (fd == -1) 
-    {
-        perror("open");
-        return 1;
-    }
-
-    pid_t pid = fork();
-    if (pid == -1) 
-    {
-        perror("fork");
-        return 1;
-    }
-    else if (pid == 0) 
-    {
-        char buffer[10];
-        read(fd, buffer, 5);
-        buffer[5] = '\0';
-        printf("Child read: %s\n", buffer);
+int main(int c, char **v) {
+    int f = open(v[1], 0);
+    char b[6];
+    if (!fork()) {
+        read(f, b, 5); 
+        b[5] = 0;
+        printf("Child: %s\n", b);
     } 
-    else 
-    {
-        wait(NULL);
-        char buffer[10];
-        read(fd, buffer, 5);
-        buffer[5] = '\0';
-        printf("Parent read: %s\n", buffer);
+    else {
+        wait(0);
+        read(f, b, 5); 
+        b[5] = 0;
+        printf("Parent: %s\n", b);
     }
-
-    close(fd);
-    return 0;
 }
