@@ -4,21 +4,19 @@
 #include <sys/stat.h>
 
 int main(int argc, char *argv[]) {
-    struct stat buf;
+    struct stat s;
     char *type;
     
     for (int i = 1; i < argc; i++) {
-        lstat(argv[i], &buf);
-        type = (S_ISREG(buf.st_mode)) ? "regular" :
-               (S_ISDIR(buf.st_mode)) ? "directory" :
-               (S_ISCHR(buf.st_mode)) ? "character special" :
-               (S_ISBLK(buf.st_mode)) ? "block special" :
-               (S_ISFIFO(buf.st_mode)) ? "fifo" :
-               (S_ISLNK(buf.st_mode)) ? "symbolic link" :
-               (S_ISSOCK(buf.st_mode)) ? "socket" : "** unknown mode **";
+        lstat(argv[i], &s);
+        type = (S_ISREG(s.st_mode)) ? "regular" :
+               (S_ISDIR(s.st_mode)) ? "directory" :
+               (S_ISCHR(s.st_mode)) ? "character special" :
+               (S_ISBLK(s.st_mode)) ? "block special" :
+               (S_ISFIFO(s.st_mode)) ? "fifo" :
+               (S_ISLNK(s.st_mode)) ? "symbolic link" :
+               (S_ISSOCK(s.st_mode)) ? "socket" : "** unknown mode **";
         printf("%s: %s\n", argv[i], type);
     }
     return 0;
 }
-
-// ./a.out test.txt test2.txt
