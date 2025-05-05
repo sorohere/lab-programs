@@ -5,6 +5,8 @@
 // iv. Display the file size
 
 
+// C program to demonstrate lseek with numeric constants
+
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -17,17 +19,17 @@ int main(int argc, char **v) {
     write(1, buf, 20);
     write(1, "\n", 1);
 
-    lseek(fd, 10, SEEK_SET);
+    lseek(fd, 10, 0);  // SEEK_SET = 0
     read(fd, buf, 20);
     write(1, buf, 20);
     write(1, "\n", 1);
 
-    lseek(fd, 10, SEEK_CUR);
+    lseek(fd, 10, 1);  // SEEK_CUR = 1
     read(fd, buf, 20);
     write(1, buf, 20);
     write(1, "\n", 1);
 
-    int size = lseek(fd, 0, SEEK_END);
+    int size = lseek(fd, 0, 2);  // SEEK_END = 2
     printf("Size of file: %d bytes\n", size);
 
     close(fd);
