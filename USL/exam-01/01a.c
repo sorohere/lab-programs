@@ -1,20 +1,23 @@
-// Write a C program to display the file content in reverse order using lseek system call.
+// Write a C program to remove empty files from the given directory.
 
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <dirent.h>
 
-int main(int c, char **v) {
-    int f = open(v[1], 0);
-    off_t s = lseek(f, 0, 2);
+int main(){
+    DIR *dp;
+    struct dirent *dir;
+    dp = opendir("."); 
 
-    char ch;
-    while (s--) {
-        lseek(f, s, 0);
-        read(f, &ch, 1);
-        write(1, &ch, 1);
+    while ((dir = readdir(dp)) != NULL){
+        int fd = open(dir->d_name, 0, 0777);
+        int n = lseek(fd, 0, 2);
+        
+        if (!n) unlink(dir->d_name);
     }
-    write(1, "\n", 1);
+    
+    return 0;
 }
 
-
-// ./a.out test.txt
+// ./a.out 
