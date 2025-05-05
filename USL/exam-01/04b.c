@@ -7,7 +7,7 @@
 
 int main(int argc, char *argv[]) {
     char buf[50];
-    int fd1 = open(argv[1], O_RDWR);
+    int fd1 = open(argv[1], 2);
     int fd2 = dup2(fd1, STDOUT_FILENO);
 
     read(fd1, buf, 10);
