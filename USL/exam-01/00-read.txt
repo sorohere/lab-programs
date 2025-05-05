@@ -8,3 +8,8 @@ O_CREAT = 64
 O_TRUNC = 512
 O_RDONLY = 0 (read-only mode)
 O_RDWR = 2 (read and write mode)
+
+
+SEEK_SET = 0
+SEEK_CUR = 1
+SEEK_END = 2
