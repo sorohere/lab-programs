@@ -1,25 +1,15 @@
-// Write a program to demonstrate the zombie state of a process and provide the solution for the same. 
-
-#include <stdio.h>
-#include <stdlib.h>
+#include <fcntl.h>
 #include <unistd.h>
 
-int main() {
-    pid_t pid = fork();
+int main(int argc, char *argv[]) {
+    char buff[10];
+    int src = open(argv[1], 0);
+    int dest = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    ssize_t n;
 
-    if (pid == 0) {
-        printf("Child process (PID: %d) exiting\n", getpid());
-        exit(0);
-    } 
-    else {
-        wait(NULL);  // <-- Solution: Clean up the child process
-        printf("Parent process (PID: %d) sleeping\n", getpid());
-        sleep(30);
-        printf("Parent exiting\n");
+    while ((n = read(src, buff, sizeof(buff))) > 0) {
+        write(dest, buff, n);
     }
 
     return 0;
 }
-
-// ./a.out
-// ps aux | grep Z
