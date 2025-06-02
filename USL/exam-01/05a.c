@@ -1,22 +1,31 @@
-// Write a C program that takes the file name as an argument and prints the type of the given file.
+// Write a program to copy access and modification time of a file to another 
+// file using utime function.
 
 #include <stdio.h>
 #include <sys/stat.h>
+#include <utime.h>
+#include <time.h>
 
-int main(int argc, char *argv[]) {
-    struct stat s;
-    char *type;
+int main(int argc, char* argv[]) {
+    struct stat s1, s2;
+    struct utimbuf times;
+
+    stat(argv[1], &s1);
+    stat(argv[2], &s2);
+
+    printf("Before Copying ...\n\n");
+    printf("Access Time: %sModification Time: %s\n", ctime(&s1.st_atime), ctime(&s1.st_mtime));
+
+    times.actime = s2.st_atime;
+    times.modtime = s2.st_mtime;
+    utime(argv[1], &times);
+
+    stat(argv[1], &s1);
     
-    for (int i = 1; i < argc; i++) {
-        lstat(argv[i], &s);
-        type = (S_ISREG(s.st_mode)) ? "regular" :
-               (S_ISDIR(s.st_mode)) ? "directory" :
-               (S_ISCHR(s.st_mode)) ? "character special" :
-               (S_ISBLK(s.st_mode)) ? "block special" :
-               (S_ISFIFO(s.st_mode)) ? "fifo" :
-               (S_ISLNK(s.st_mode)) ? "symbolic link" :
-               (S_ISSOCK(s.st_mode)) ? "socket" : "** unknown mode **";
-        printf("%s: %s\n", argv[i], type);
-    }
+    printf("\nAfter Copying ...\n\n");
+    printf("Access Time: %sModification Time: %s\n", ctime(&s1.st_atime), ctime(&s1.st_mtime));
+
     return 0;
 }
+
+// ./a.out fileinfotobechanged.txt desfile.txt

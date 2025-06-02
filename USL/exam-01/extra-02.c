@@ -1,29 +1,31 @@
-// Write a program to copy access and modification time of a file to another 
-// file using utime function.
+// Write a program to differentiate between dup and dup2 functions
 
 #include <stdio.h>
-#include <sys/stat.h>
-#include <utime.h>
-#include <time.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
 
-int main(int argc, char* argv[]) {
-    struct stat s1, s2;
-    struct utimbuf times;
-
-    stat(argv[1], &s1);
-    stat(argv[2], &s2);
-
-    printf("Before Copying ...\n\n");
-    printf("Access Time: %sModification Time: %s\n", ctime(&s1.st_atime), ctime(&s1.st_mtime));
-
-    times.actime = s2.st_atime;
-    times.modtime = s2.st_mtime;
+int main(int c, char **v) {
+    // dup
+    int fd1 = open(v[1], 1 | 64 | 512, 0644);
+    int fd2 = dup(fd1);
+    printf("dup(): Original fd: %d, New fd: %d\n", fd1, fd2);
+    write(fd1, "Line from fd1\n", 14);
+    write(fd2, "Line from fd2\n", 14);
+    close(fd1);
+    close(fd2);
     
-    utime(argv[1], &times);
-    stat(argv[1], &s1);
+    // dup2
+    int fd3 = open(v[2], 1 | 64 | 512, 0644);
+    int fd4 = 10;
+    dup2(fd3, fd4);
+    printf("dup2(): Original fd: %d, Specified fd: %d\n", fd3, fd4);
+    write(fd3, "Line from fd3\n", 14);
+    write(fd4, "Line from fd4\n", 14);
+    close(fd3);
+    close(fd4);
     
-    printf("\nAfter Copying ...\n\n");
-    printf("Access Time: %sModification Time: %s\n", ctime(&s1.st_atime), ctime(&s1.st_mtime));
-
     return 0;
 }
+
+// ./a.out
