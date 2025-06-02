@@ -1,26 +1,19 @@
-// Write a C program to demonstrate the creation of soft links and  hard links.
+// Write a C program to simulate system function.
 
-#include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
-int main(int argc, char *argv[]) 
-{
-    if (argc == 3) {
-        link(argv[1], argv[2]);  
-        printf("Hard link created.\n");
-    } 
-    else if (argc == 4) {
-        symlink(argv[1], argv[2]);  
-        printf("Soft link created.\n");
-    }
+int my_system(const char *cmd) {
+    if (fork() == 0)
+        execl("/bin/sh", "sh", "-c", cmd, NULL);
+    int status;
+    wait(&status);
+    return status;
+}
 
+int main() {
+    my_system("ls -l");
     return 0;
 }
 
-// ./a.out test.txt test2.txt
-// ./a.out test.txt test2.txt 1
-
-// ls -li sample.txt test.txt 
-// same inode for hard link
-
-
+// ./a.out test.txt
