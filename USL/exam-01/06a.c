@@ -1,24 +1,20 @@
-// Write a C program to demonstrate the usage of umask and chmod functions.
+// Write a program to read n characters from a file and append them back to the 
+// same file using dup2 function.
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <sys/stat.h>
 #include <unistd.h>
+#include <fcntl.h>
 
-int main() {
-    umask(0);
-    creat("foo", 0644); 
-    umask(022);
-    creat("bar", 0666);
+int main(int argc, char *argv[]) {
+    char buf[50];
+    int fd1 = open(argv[1], 2);
+    int fd2 = dup2(fd1, 1);
+
+    read(fd1, buf, 10);
+    lseek(fd2, 0, SEEK_END);
+    write(fd2, buf, 10);
 
     return 0;
 }
 
-
-int main() {
-    chmod("foo", 0777);  
-    chmod("bar", 0600); 
-    
-    return 0;
-}
+// ./a.out test.txt

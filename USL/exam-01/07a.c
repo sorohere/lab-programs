@@ -1,32 +1,31 @@
-// Demonstrate the working of wait and waitpid system calls with a program
+// Write a C program to illustrate the effect of setjmp and longjmp functions on register and volatile variables.
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/types.h>
+#include <setjmp.h>
 
-int main(){
-    int st;
-    pid_t pid1 = fork();
-    pid_t pid2 = fork();
+jmp_buf jmpbuffer;
+int globval = 1;
 
-    if (pid1 == 0){
-        printf("first pid:%d\n", getpid());
-        sleep(2);
-        exit(0);
-    }
-    if (pid2 == 0){
-        printf("second pid:%d\n", getpid());
-        sleep(4);
-        exit(0);
+int main(void) {
+    register int regval = 1;
+    volatile int volval = 1;
+    static int statval = 1;
+
+    printf("Before setjmp:\n");
+    printf("globval = %d, statval = %d, regval = %d, volval = %d\n", globval, statval, regval, volval);
+
+    if (setjmp(jmpbuffer) != 0) {
+        printf("After longjmp:\n");
+        printf("globval = %d, statval = %d, regval = %d, volval = %d\n", globval, statval, regval, volval);
+        return 0;
     }
 
-    wait(&st);
-    printf("first wait\n");
-    sleep(1);
-    waitpid(pid2, &st, 0);
-    printf("second wait\n");
+    globval = 10;
+    statval = 10;
+    regval = 10;
+    volval = 10;
+
+    longjmp(jmpbuffer, 1);
 
     return 0;
 }

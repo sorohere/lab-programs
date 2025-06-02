@@ -1,37 +1,39 @@
-// Write a C program
-// i. To read the first 20 characters from a file
-// ii. seek to 10th byte from the beginning and display 20 characters from there
-// iii. seek 10 bytes ahead from the current file offset and display 20 characters
-// iv. Display the file size
+// Consider the last 100 bytes as a region. Write a C program to check whether the region is locked or not. If the region is locked, print pid of the process which has locked. If the region is not locked, lock the region with an exclusive lock, read the last 50 bytes and unlock the region.
 
-
-// C program to demonstrate lseek with numeric constants
-
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdio.h>
 
-int main(int argc, char **v) {
-    int fd = open(v[1], 0);
-    char buf[25];
+int main(int argc, char *argv[]) {
+    int fd = open(argv[1], O_RDONLY);
+    struct flock lock;
+    char buffer[51];
 
-    read(fd, buf, 20);
-    write(1, buf, 20);
-    write(1, "\n", 1);
+    lock.l_type = F_WRLCK;
+    lock.l_whence = SEEK_END;
+    lock.l_start = -100;
+    lock.l_len = 100;
 
-    lseek(fd, 10, 0);  // SEEK_SET = 0
-    read(fd, buf, 20);
-    write(1, buf, 20);
-    write(1, "\n", 1);
+    fcntl(fd, F_GETLK, &lock);
 
-    lseek(fd, 10, 1);  // SEEK_CUR = 1
-    read(fd, buf, 20);
-    write(1, buf, 20);
-    write(1, "\n", 1);
+    if (lock.l_type != F_UNLCK) {
+        printf("Region locked by PID: %d\n", lock.l_pid);
+    } else {
+        lock.l_type = F_WRLCK;
+        fcntl(fd, F_SETLK, &lock);
 
-    int size = lseek(fd, 0, 2);  // SEEK_END = 2
-    printf("Size of file: %d bytes\n", size);
+        lseek(fd, -50, SEEK_END);
+        read(fd, buffer, 50);
+        buffer[50] = '\0';
+        printf("Last 50 bytes: %s\n", buffer);
+
+        lock.l_type = F_UNLCK;
+        fcntl(fd, F_SETLK, &lock);
+    }
 
     close(fd);
     return 0;
 }
+
+
+// ./a.out sample.txt

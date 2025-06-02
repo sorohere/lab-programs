@@ -1,20 +1,37 @@
-// Write a program to read n characters from a file and append them back to the 
-// same file using dup2 function.
+// Write a C program
+// i. To read the first 20 characters from a file
+// ii. seek to 10th byte from the beginning and display 20 characters from there
+// iii. seek 10 bytes ahead from the current file offset and display 20 characters
+// iv. Display the file size
 
-#include <stdio.h>
-#include <unistd.h>
+
+// C program to demonstrate lseek with numeric constants
+
 #include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
 
-int main(int argc, char *argv[]) {
-    char buf[50];
-    int fd1 = open(argv[1], 2);
-    int fd2 = dup2(fd1, STDOUT_FILENO);
+int main(int argc, char **v) {
+    int fd = open(v[1], 0);
+    char buf[25];
 
-    read(fd1, buf, 10);
-    lseek(fd2, 0L, SEEK_END);
-    write(fd2, buf, 10);
+    read(fd, buf, 20);
+    write(1, buf, 20);
+    write(1, "\n", 1);
 
+    lseek(fd, 10, 0);  // SEEK_SET = 0
+    read(fd, buf, 20);
+    write(1, buf, 20);
+    write(1, "\n", 1);
+
+    lseek(fd, 10, 1);  // SEEK_CUR = 1
+    read(fd, buf, 20);
+    write(1, buf, 20);
+    write(1, "\n", 1);
+
+    int size = lseek(fd, 0, 2);  // SEEK_END = 2
+    printf("Size of file: %d bytes\n", size);
+
+    close(fd);
     return 0;
 }
-
-// ./a.out test.txt
