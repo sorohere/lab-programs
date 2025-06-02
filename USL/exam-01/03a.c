@@ -1,7 +1,5 @@
 // Write a C program to remove empty files from the given directory.
 
-// 2a + 3a
-
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -13,7 +11,7 @@ int main(){
     dp = opendir("."); 
 
     while ((dir = readdir(dp)) != NULL){
-        int fd = open(dir->d_name, 0, 0777);
+        int fd = open(dir->d_name, 0);
         int n = lseek(fd, 0, 2);
         
         if (!n) unlink(dir->d_name);

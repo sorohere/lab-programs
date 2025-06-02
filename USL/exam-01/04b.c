@@ -1,20 +1,43 @@
-// Write a program to read n characters from a file and append them back to the 
-// same file using dup2 function.
+// b) Write a C program to
+    // i. To create a child process.
+    // ii. The child should execute an interpreter file by passing a few arguments 
+    // iii. Create an interpreter file that has the path of echoall.c file and pass one argument
+    // iv. Create echoall.c file which prints the arguments received from both child process and interpreter file.
 
+// main.c
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <fcntl.h>
 
-int main(int argc, char *argv[]) {
-    char buf[50];
-    int fd1 = open(argv[1], 2);
-    int fd2 = dup2(fd1, STDOUT_FILENO);
+int main() {
+    pid_t pid = fork();
 
-    read(fd1, buf, 10);
-    lseek(fd2, 0L, SEEK_END);
-    write(fd2, buf, 10);
+    if (pid == 0) {
+        char *args[] = {"./interpreter.sh", "child_arg", NULL};
+        execv("./interpreter.sh", args);
+    } else {
+        wait(NULL);
+    }
 
     return 0;
 }
 
-// ./a.out test.txt
+// interpreter.sh
+#!/bin/bash
+./echoall interpreter_arg "$1"
+
+
+// use this cmd to make it executable
+chmod +x interpreter.sh
+
+
+// echoall.c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    printf("Arguments received:\n");
+    for (int i = 0; i < argc; i++) {
+        printf("argv[%d]: %s\n", i, argv[i]);
+    }
+    return 0;
+}
