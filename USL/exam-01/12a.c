@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 int main() {
     pid_t pid = fork();
@@ -13,8 +14,8 @@ int main() {
     } 
     else {
         wait(NULL);  // <-- Solution: Clean up the child process
-        printf("Parent process (PID: %d) sleeping\n", getpid());
         sleep(30);
+        printf("Parent process (PID: %d) sleeping\n", getpid());
         printf("Parent exiting\n");
     }
 
